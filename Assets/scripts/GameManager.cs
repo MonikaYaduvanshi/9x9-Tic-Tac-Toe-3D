@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Won(int winningCell, Sprite Win){
-        Debug.Log("----- Akshat Did it ------ ");  
+        Debug.Log("----- Monchu Did it ------ ");  
         // GameObject winner = Instantiate(Win);
         for(int i=0;i<cell.transform.childCount;i++){
             GameObject cellChild = cell.transform.GetChild(i).gameObject;
