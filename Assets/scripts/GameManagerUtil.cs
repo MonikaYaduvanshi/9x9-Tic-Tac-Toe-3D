@@ -9,6 +9,15 @@ using UnityEngine;
 /// 2 - o won
 /// </summary>
 
+
+/// <summary>
+// -- important to know 
+// 0 - disable at the moment
+// 1 - enable at the moment
+// 2 - selected by cross and disable onwards
+// 3 - selected by zero and disable onwards
+/// </summary>
+
 public class GameManagerUtil : MonoBehaviour
 {
     public GameManager gameManager;
@@ -76,6 +85,7 @@ public class GameManagerUtil : MonoBehaviour
         }
         Debug.Log("BL to TR: " + cellNum + " counterX: " + counter_x + " counterO: " + counter_o);
         if(checkWon(cellNum, counter_x, counter_o)) return;
+        checkTie(cellNum);
     }
 
     bool checkWon(int cell, int counter_x, int counter_o){
@@ -93,6 +103,25 @@ public class GameManagerUtil : MonoBehaviour
         }
         return false;
     }
+
+    void checkTie(int cell){
+        for(int i = 0; i<9; i++){
+            if(gameManager.data[cell][i].Value == 1)
+                return;
+        }
+        Debug.Log("Tie on cell: " + cell);
+        gameManager.cellTie(cell);
+    }
+
+    void checkFinalTie(){
+        for(int i = 0; i<9; i++){
+            if(cellWins[i] == 0)
+                return;
+        }
+        Debug.Log("Tie on final cell");
+        gameManager.finalTie();
+    }
+
     void checkFinalWinningCondition(){
         int final_o = 0;
         int final_x = 0;
@@ -147,7 +176,9 @@ public class GameManagerUtil : MonoBehaviour
        if(checkFinalWon(final_x, final_o)) return; 
 
         // nobody won
+        checkFinalTie();
     }
+
     bool checkFinalWon(int x, int o){
         if(x == 3){
             // x won

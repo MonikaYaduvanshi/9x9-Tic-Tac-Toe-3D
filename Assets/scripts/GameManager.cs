@@ -161,4 +161,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void finalTie(){
+        //final tie UI
+    }
+
+    public void cellTie(int cellNum){
+        //cell tie UI
+    }
 }
